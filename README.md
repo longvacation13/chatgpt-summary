@@ -29,5 +29,5 @@
 
 1️⃣ **GitHub에서 코드 다운로드**
 ```bash
-git clone https://github.com/yourusername/chatgpt-toc-extension.git
+git clone https://github.com/longvacation13/chatgpt-summary.git
 cd chatgpt-toc-extension
