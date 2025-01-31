@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "ChatGPT 목차 정리 확장 프로그램",
+    "version": "1.0",
+    "description": "ChatGPT의 내용을 정리하여 목차를 제공하고, 클릭하면 해당 위치로 이동합니다.",
+    "icons": {
+      "128": "icon.png"
+    },
+    "permissions": ["scripting"],
+    "host_permissions": [
+      "https://chat.openai.com/*",
+      "https://chatgpt.com/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": [
+          "https://chat.openai.com/*",
+          "https://chatgpt.com/*"
+        ],
+        "js": ["content.js"],
+        "css": ["styles.css"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    }
+  }
+  
