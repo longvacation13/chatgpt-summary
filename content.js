@@ -1,3 +1,46 @@
+
+// 현재 URL 저장 (초기값)
+let currentURL = window.location.href;
+
+// URL 변경 감지하여 목차 갱신
+const observeURLChange = () => {
+    setInterval(() => {
+        if (window.location.href !== currentURL) {
+            console.log("🔄 URL 변경 감지됨 → 목차 갱신");
+            currentURL = window.location.href;
+
+            // ChatGPT 페이지가 완전히 로드될 때까지 대기 후 실행
+            setTimeout(() => {
+                generateToc();
+                updateSidebarTitle();
+            }, 1500);
+        }
+    }, 2000);
+};
+
+// 사이드바 제목 업데이트 함수
+const updateSidebarTitle = () => {
+    let chatTitle = document.querySelector("h1")?.innerText || "목차"; 
+    let sidebarTitle = document.getElementById("sidebar-title");
+    if (sidebarTitle) {
+        sidebarTitle.innerText = chatTitle;
+    }
+};
+
+// ChatGPT 응답을 감지하여 목차 자동 갱신
+const observeChatGPT = () => {
+    let chatContainer = document.querySelector(".flex.flex-col.text-sm");
+    if (!chatContainer) return;
+
+    const observer = new MutationObserver(() => {
+        console.log("🔄 ChatGPT 응답 변경 감지 → 목차 갱신");
+        generateToc();
+    });
+
+    observer.observe(chatContainer, { childList: true, subtree: true });
+};
+
+
 // 사이드바 생성 함수
 const createSidebar = () => {
     let existingSidebar = document.getElementById("chatgpt-sidebar");
@@ -90,5 +133,7 @@ window.onload = () => {
     setTimeout(() => {
         createSidebar();
         generateToc();
+        observeChatGPT(); 
+        observeURLChange(); 
     }, 2000);
 };
