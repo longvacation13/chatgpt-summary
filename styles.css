@@ -1,17 +1,18 @@
-/* 기본 사이드바 스타일 */
+/* 🌞 기본 스타일 (라이트 모드) */
 #chatgpt-sidebar {
     position: fixed;
     right: 10px;
     top: 50px;
     width: 200px;
     background: white;
+    color: black; /* ✅ 기본 글자색 추가 */
     border: 1px solid #ccc;
     padding: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: width 0.3s ease-in-out;
     overflow: hidden;
-    overflow-y: auto; /* ✅ 세로 스크롤 가능하도록 설정 */
+    overflow-y: auto; /* ✅ 세로 스크롤 가능 */
     max-height: 80vh; /* ✅ 화면 높이에 맞게 최대 높이 설정 */
 }
 
@@ -22,16 +23,27 @@
     overflow: hidden;
 }
 
-/* 접힌 상태에서는 목차와 제목을 숨김 */
-#chatgpt-sidebar.collapsed h3,
-#chatgpt-sidebar.collapsed ul {
-    display: none;
+/* 🌙 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    #chatgpt-sidebar {
+        background: #1e1e1e; /* ✅ 다크 모드 배경색 */
+        color: #ffffff; /* ✅ 다크 모드 글자색 */
+        border: 1px solid #444;
+    }
+
+    #toc li {
+        border-bottom: 1px solid #444; /* ✅ 다크 모드 테두리 */
+    }
+
+    #toc li:hover {
+        background: #333; /* ✅ 다크 모드 hover 효과 */
+    }
 }
 
-/* 토글 버튼 스타일 (사이드바 바깥쪽) */
+/* 🌞🌙 다크 모드에서도 토글 버튼이 잘 보이도록 조정 */
 #toggle-sidebar {
     position: fixed;
-    right: 215px; /* 사이드바 너비 + 여백 */
+    right: 215px;
     top: 50px;
     width: 30px;
     height: 30px;
@@ -45,14 +57,13 @@
     transition: right 0.3s ease-in-out;
 }
 
-/* 접힌 상태에서 버튼 위치 이동 */
-#chatgpt-sidebar.collapsed + #toggle-sidebar {
-    right: 35px; /* 접힌 사이드바 기준으로 버튼 이동 */
-}
-
-/* 토글 버튼 호버 효과 */
 #toggle-sidebar:hover {
     background: #0056b3;
+}
+
+/* 접힌 상태에서 버튼 위치 이동 */
+#chatgpt-sidebar.collapsed + #toggle-sidebar {
+    right: 35px;
 }
 
 /* 목차 리스트 스타일 */
@@ -68,6 +79,13 @@
     cursor: pointer;
 }
 
-#toc li:hover {
-    background: #f0f0f0;
+/* 🌙 다크 모드 리스트 스타일 */
+@media (prefers-color-scheme: dark) {
+    #toc li {
+        border-bottom: 1px solid #444;
+    }
+
+    #toc li:hover {
+        background: #333;
+    }
 }
